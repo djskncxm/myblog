@@ -1,5 +1,5 @@
 # Hugo configuration file
-title: My Site
+title: Duck_Spider_OS
 
 # import hextra as module
 module:
@@ -18,29 +18,26 @@ markup:
 
 menu:
   main:
-    - name: Docs
+    - name: 文章
       pageRef: /docs
       weight: 1
-    - name: About
+    - name: 关于我
       pageRef: /about
       weight: 2
-    - name: Contact ↗
-      url: "https://github.com/imfing"
-      weight: 3
-    - name: Search
+    - name: 搜索
       weight: 4
       params:
         type: search
     - name: GitHub
       weight: 5
-      url: "https://github.com/imfing/hextra-starter-template"
+      url: "https://github.com/djskncxm/"
       params:
         icon: github
-    - name: Twitter
-      weight: 6
-      url: "https://twitter.com/"
-      params:
-        icon: x-twitter
+    # - name: Twitter
+    #   weight: 6
+    #   url: "https://twitter.com/"
+    #   params:
+    #     icon: x-twitter
 
 params:
   navbar:
