@@ -1,18 +1,17 @@
-# Hugo configuration file
 title: Duck_Spider_OS
 
-# import hextra as module
 module:
   imports:
     - path: github.com/imfing/hextra
+  mounts:
+    - source: assets
+      target: static
 
 markup:
-  # allow raw html
   goldmark:
     renderer:
       unsafe: true
 
-  # enable hextra syntax highlight
   highlight:
     noClasses: false
 
@@ -33,6 +32,10 @@ menu:
       url: "https://github.com/djskncxm/"
       params:
         icon: github
+    - name: Theme Toggle
+      params:
+        type: theme-toggle
+        label: true # optional, default is false
 
 params:
   navbar:
@@ -42,4 +45,6 @@ params:
   footer:
     displayCopyright: true
     displayPoweredBy: true
-
+  theme:
+    default: dark
+    displayToggle: true
