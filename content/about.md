@@ -3,6 +3,8 @@ title: 关于我
 type: about
 ---
 
+联系方式：959735909@qq.com
+---
 # 技术栈
 #### 编程语言
 Python JavaScript shell(bash) SQL C ASM(X86_att) Golang<br>
