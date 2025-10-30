@@ -35,7 +35,7 @@ menu:
     - name: Theme Toggle
       params:
         type: theme-toggle
-        label: true # optional, default is false
+        label: true
 
 params:
   navbar:
