@@ -1,6 +1,7 @@
 ---
 title: 古典密码学
-toc: false
+type: docs
+prev: docs
 ---
 ![Cryptography](../../../Cryptography.png)
 
