@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -14,16 +15,13 @@ func EncodeBase64(data []byte) string {
 		remaining := n - i
 		copy(b[:], data[i:])
 
-		// 24 位数据
 		val := uint(b[0])<<16 | uint(b[1])<<8 | uint(b[2])
 
-		// 取 6 位一组
 		for j := 18; j >= 0; j -= 6 {
 			index := (val >> j) & 0x3F
 			result = append(result, base64Table[index])
 		}
 
-		// 填充 '='
 		if remaining == 1 {
 			result[len(result)-2] = '='
 			result[len(result)-1] = '='
@@ -45,6 +43,32 @@ func Caesar_Cipher(data string) string {
 	}
 	return res.String()
 }
+func Vigenère_Cipher(data string, key string) string {
+	var result strings.Builder
+	key = strings.ToUpper(key)
+	keyIndex := 0
+	for i := 0; i < len(data); i++ {
+		char := data[i]
+
+		if char >= 'A' && char <= 'Z' {
+			plainIndex := char - 'A'
+			keyChar := key[keyIndex%len(key)]
+			cipherIndex := (plainIndex + (keyChar - 'A')) % 26
+			result.WriteByte('A' + cipherIndex)
+			keyIndex++
+		} else if char >= 'a' && char <= 'z' {
+			plainIndex := char - 'a'
+			keyChar := key[keyIndex%len(key)]
+			cipherIndex := (plainIndex + (keyChar - 'A')) % 26
+			result.WriteByte('a' + cipherIndex)
+			keyIndex++
+		} else {
+			result.WriteByte(char)
+		}
+	}
+
+	return result.String()
+}
 
 func main() {
 	// data := []byte("Hello World!")
@@ -53,4 +77,6 @@ func main() {
 
 	// data := "duck"
 	// Caesar_Cipher(data)
+
+	fmt.Println(Vigenère_Cipher("DUCK", "KEY"))
 }
