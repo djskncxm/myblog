@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"strings"
+)
 
 var base64Table = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 
@@ -32,8 +34,23 @@ func EncodeBase64(data []byte) string {
 	return string(result)
 }
 
+func Caesar_Cipher(data string) string {
+	data = strings.ToUpper(data)
+	var res strings.Builder
+	for _, char := range data {
+		if char >= 'A' && char <= 'Z' {
+			enc := byte((int(char-'A')+3)%26 + 'A')
+			res.WriteByte(enc)
+		}
+	}
+	return res.String()
+}
+
 func main() {
-	data := []byte("Hello World!")
-	encoded := EncodeBase64(data)
-	fmt.Println(encoded) // 输出: "SGVsbG8gV29ybGQh"
+	// data := []byte("Hello World!")
+	// encoded := EncodeBase64(data)
+	// fmt.Println(encoded)
+
+	// data := "duck"
+	// Caesar_Cipher(data)
 }
