@@ -70,6 +70,93 @@ func Vigenère_Cipher(data string, key string) string {
 	return result.String()
 }
 
+func playfair_buildMatrix(key string) (Matrix [5][5]rune, key_table map[rune][2]int) {
+	data := strings.ToUpper(strings.ReplaceAll(key, "J", "I"))
+
+	used := map[rune]bool{}
+	var chars []rune
+
+	for _, c := range data {
+		if c >= 'A' && c <= 'Z' && !used[c] {
+			used[c] = true
+			chars = append(chars, c)
+		}
+	}
+
+	for c := 'A'; c <= 'Z'; c++ {
+		if c == 'J' {
+			continue
+		}
+		if !used[c] {
+			chars = append(chars, c)
+			used[c] = true
+		}
+	}
+
+	var matrix [5][5]rune
+	pos := map[rune][2]int{}
+	for i, c := range chars {
+		r, col := i/5, i%5
+		matrix[r][col] = c
+		pos[c] = [2]int{r, col}
+	}
+
+	return matrix, pos
+}
+
+func playfair_Preprocess(text string) string {
+	text = strings.ToUpper(strings.ReplaceAll(text, "J", "I"))
+	var result []rune
+
+	for i := 0; i < len(text); i++ {
+		c1 := rune(text[i])
+		var c2 rune
+		if i+1 < len(text) {
+			c2 = rune(text[i+1])
+			if c1 == c2 {
+				c2 = 'X'
+			} else {
+				i++
+			}
+		}
+		result = append(result, c1, c2)
+	}
+	if len(result)%2 == 0 {
+		result = append(result, 'X')
+	}
+
+	return strings.ReplaceAll(string(result), " ", "")
+}
+
+func playfair_encrypt(data string, key string) (res string) {
+	var result []rune
+	data = playfair_Preprocess(data)
+	matrix, pos := playfair_buildMatrix(key)
+	fmt.Println(pos)
+
+	for i := 0; i < len(data); i += 2 {
+		a, b := rune(data[i]), rune(data[i+1])
+		r1, c1 := pos[a][0], pos[a][1]
+		r2, c2 := pos[b][0], pos[b][1]
+
+		var x, y rune
+		switch {
+		case r1 == r2:
+			x = matrix[r1][(c1+1)%5]
+			y = matrix[r2][(c2+1)%5]
+		case c1 == c2:
+			x = matrix[(r1+1)%5][c1]
+			y = matrix[(r2+1)%5][c2]
+		default:
+			x = matrix[r1][c2]
+			y = matrix[r2][c1]
+		}
+		result = append(result, x, y)
+	}
+
+	return string(result)
+}
+
 func main() {
 	// data := []byte("Hello World!")
 	// encoded := EncodeBase64(data)
@@ -78,5 +165,8 @@ func main() {
 	// data := "duck"
 	// Caesar_Cipher(data)
 
-	fmt.Println(Vigenère_Cipher("DUCK", "KEY"))
+	// fmt.Println(Vigenère_Cipher("DUCK", "KEY"))
+
+	fmt.Println(playfair_encrypt("HELLO WORLD", "PLAYFAIR EXAMPLE"))
+
 }
