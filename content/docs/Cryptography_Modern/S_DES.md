@@ -166,3 +166,169 @@ IP⁻¹置换：
 最终结果是`11111011`
 ---
 终于写完了，想的我脑子疼，马上爆炸
+
+# 代码
+我写了的是个go版本，cpp的GitHub上面有个版本，C我是真写不出来太费劲了，还请各位自己写吧
+```go
+func S_DES_KeyLL(key []byte, shiftCount int) [5]byte {
+	length := len(key)
+	reslut := make([]byte, length)
+
+	for i := 0; i < length; i++ {
+		reslut[i] = key[(i+shiftCount)%length]
+	}
+	var out [5]byte
+	copy(out[:], reslut)
+	return out
+}
+
+func S_DES_P8(key []byte) [8]byte {
+
+	P8 := [8]int{5, 2, 6, 3, 7, 4, 9, 8}
+
+	var result [8]byte
+	for i, pos := range P8 {
+		result[i] = key[pos]
+	}
+	return result
+}
+
+func S_DESBuildKeys(key [10]byte) map[string][]byte {
+	P10 := [10]int{2, 4, 1, 6, 3, 9, 0, 8, 7, 5}
+
+	var newKey [10]byte
+
+	for i, pos := range P10 {
+		newKey[i] = key[pos]
+	}
+
+	L1 := newKey[:5]
+	R1 := newKey[5:]
+	LL1 := S_DES_KeyLL(L1, 1)
+	RR1 := S_DES_KeyLL(R1, 1)
+
+	combined := append(LL1[:], RR1[:]...)
+	P8_KEY1 := S_DES_P8(combined)
+
+	LL2 := S_DES_KeyLL(LL1[:], 2)
+	RR2 := S_DES_KeyLL(RR1[:], 2)
+	combined2 := append(LL2[:], RR2[:]...)
+	P8_KEY2 := S_DES_P8(combined2)
+
+	return map[string][]byte{"k1": P8_KEY1[:], "k2": P8_KEY2[:]}
+}
+
+func S_DESBuildData(data [8]byte) (result [8]byte) {
+	IP := [8]int{1, 5, 2, 0, 3, 7, 4, 6}
+
+	for i, p := range IP {
+		result[i] = data[p]
+	}
+
+	return result
+}
+
+func S_DES_EP(bin []byte, key []byte) [8]byte {
+	EP := [8]byte{3, 0, 1, 2, 1, 2, 3, 0}
+
+	var EP_1 [8]byte
+	for i, p := range EP {
+		EP_1[i] = bin[p] ^ key[i]
+	}
+
+	return EP_1
+}
+
+func S_DES_S(bin []byte, S [4][4]byte) [2]byte {
+	row := bin[0]*2 + bin[3]
+	col := bin[1]*2 + bin[2]
+
+	val := S[row][col]
+
+	return [2]byte{(val >> 1) & 1, val & 1}
+}
+
+func S_DES_F(bin [8]byte, key []byte) [8]byte {
+	EPout := S_DES_EP(bin[4:], key)
+	var S0 = [4][4]byte{
+		{1, 0, 3, 2},
+		{3, 2, 1, 0},
+		{0, 2, 1, 3},
+		{3, 1, 3, 2},
+	}
+
+	var S1 = [4][4]byte{
+		{0, 1, 2, 3},
+		{2, 0, 1, 3},
+		{3, 0, 1, 0},
+		{2, 1, 0, 3},
+	}
+
+	S0out := S_DES_S(EPout[:4], S0)
+	S1out := S_DES_S(EPout[4:], S1)
+
+	preP4 := [4]byte{S0out[0], S0out[1], S1out[0], S1out[1]}
+	P4 := [4]byte{1, 3, 2, 0}
+
+	var out [4]byte
+	for i, p := range P4 {
+		out[i] = preP4[p]
+	}
+
+	L1 := [4]byte{}
+	for i := 0; i < 4; i++ {
+		L1[i] = bin[i] ^ out[i]
+	}
+	R1 := bin[4:]
+
+	result := [8]byte{}
+	copy(result[:4], L1[:])
+	copy(result[4:], R1)
+
+	fmt.Println(result)
+
+	return result
+}
+
+func S_DES_IP_1(fout []byte) []byte {
+	IPinv := [8]int{3, 0, 2, 4, 6, 1, 7, 5}
+	var ciphertext [8]byte
+	for i, p := range IPinv {
+		ciphertext[i] = fout[p]
+	}
+	return ciphertext[:]
+}
+
+func S_DES(text byte, key [10]byte) []byte {
+	keys := S_DESBuildKeys(key)
+
+	var bin [8]uint8
+
+	for i := 0; i < 8; i++ {
+		bin[i] = (text >> (7 - i)) & 1
+	}
+
+	data := S_DESBuildData(bin)
+
+	Fout := S_DES_F(data, keys["k1"])
+	swapped := [8]byte{}
+	copy(swapped[:4], Fout[4:])
+	copy(swapped[4:], Fout[:4])
+	F2out := S_DES_F(swapped, keys["k2"])
+
+	return S_DES_IP_1(F2out[:])
+}
+
+func main() {
+	key := [10]byte{1, 0, 1, 0, 0, 0, 0, 0, 1, 0}
+	reslut := S_DES('d', key)
+
+	var val byte
+	for i := 0; i < 8; i++ {
+		val <<= 1
+		val |= reslut[i]
+	}
+	letter := 'A' + val%26
+	fmt.Printf("%c\n", letter)
+}
+```
