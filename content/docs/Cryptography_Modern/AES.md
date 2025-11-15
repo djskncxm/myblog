@@ -1,314 +1,20 @@
-package main
+---
+title: AES -> 对称加密的风向标
+type: docs
+---
 
-import (
-	"crypto/aes"
-	"encoding/base64"
-	"encoding/hex"
-	"fmt"
-	"sort"
-	"strings"
-)
+![bg](../../../wallhaven-85zooo_1920x1080.png)
+各位看见这张图也就大改知道这次学习的密码重要性和难度
+>当你用手机转账、在网站输入密码、甚至只是发送一条私密消息时，一场无声的加密风暴正在幕后上演。而这场风暴的核心，有一个名字如雷贯耳——AES</br>
+>它不是科幻小说里的黑科技，却是守护我们数字生活每一刻的基石。从军事机密到你的聊天记录，AES是如何成为全球加密标准的？它背后的魔法，究竟是什么？
 
-var base64Table = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+AES密码作为对称密码的标杆，目前尚未有公开的、能够大规模替代它的算法。它经过了二十多年的考验，仍然是全球范围内最受信赖的对称加密标准之一</br>
 
-func EncodeBase64(data []byte) string {
-	var result []byte
-	n := len(data)
-	for i := 0; i < n; i += 3 {
-		var b [3]byte
-		remaining := n - i
-		copy(b[:], data[i:])
+那么这篇博客来详细的讲解对称加密的风向标`AES`，这玩意快给我干吐了，博客根本写不出来，给各位推荐个CSDN的博客</br>
+[AES权威博客](https://blog.csdn.net/qq_28205153/article/details/55798628)
 
-		val := uint(b[0])<<16 | uint(b[1])<<8 | uint(b[2])
-
-		for j := 18; j >= 0; j -= 6 {
-			index := (val >> j) & 0x3F
-			result = append(result, base64Table[index])
-		}
-
-		if remaining == 1 {
-			result[len(result)-2] = '='
-			result[len(result)-1] = '='
-		} else if remaining == 2 {
-			result[len(result)-1] = '='
-		}
-	}
-	return string(result)
-}
-
-func Caesar_Cipher(data string) string {
-	data = strings.ToUpper(data)
-	var res strings.Builder
-	for _, char := range data {
-		if char >= 'A' && char <= 'Z' {
-			enc := byte((int(char-'A')+3)%26 + 'A')
-			res.WriteByte(enc)
-		}
-	}
-	return res.String()
-}
-func Vigenère_Cipher(data string, key string) string {
-	var result strings.Builder
-	key = strings.ToUpper(key)
-	keyIndex := 0
-	for i := 0; i < len(data); i++ {
-		char := data[i]
-
-		if char >= 'A' && char <= 'Z' {
-			plainIndex := char - 'A'
-			keyChar := key[keyIndex%len(key)]
-			cipherIndex := (plainIndex + (keyChar - 'A')) % 26
-			result.WriteByte('A' + cipherIndex)
-			keyIndex++
-		} else if char >= 'a' && char <= 'z' {
-			plainIndex := char - 'a'
-			keyChar := key[keyIndex%len(key)]
-			cipherIndex := (plainIndex + (keyChar - 'A')) % 26
-			result.WriteByte('a' + cipherIndex)
-			keyIndex++
-		} else {
-			result.WriteByte(char)
-		}
-	}
-
-	return result.String()
-}
-
-func playfair_buildMatrix(key string) (Matrix [5][5]rune, key_table map[rune][2]int) {
-	data := strings.ToUpper(strings.ReplaceAll(key, "J", "I"))
-
-	used := map[rune]bool{}
-	var chars []rune
-
-	for _, c := range data {
-		if c >= 'A' && c <= 'Z' && !used[c] {
-			used[c] = true
-			chars = append(chars, c)
-		}
-	}
-
-	for c := 'A'; c <= 'Z'; c++ {
-		if c == 'J' {
-			continue
-		}
-		if !used[c] {
-			chars = append(chars, c)
-			used[c] = true
-		}
-	}
-
-	var matrix [5][5]rune
-	pos := map[rune][2]int{}
-	for i, c := range chars {
-		r, col := i/5, i%5
-		matrix[r][col] = c
-		pos[c] = [2]int{r, col}
-	}
-
-	return matrix, pos
-}
-
-func playfair_Preprocess(text string) string {
-	text = strings.ToUpper(strings.ReplaceAll(text, "J", "I"))
-	var result []rune
-
-	for i := 0; i < len(text); i++ {
-		c1 := rune(text[i])
-		var c2 rune
-		if i+1 < len(text) {
-			c2 = rune(text[i+1])
-			if c1 == c2 {
-				c2 = 'X'
-			} else {
-				i++
-			}
-		}
-		result = append(result, c1, c2)
-	}
-	if len(result)%2 == 0 {
-		result = append(result, 'X')
-	}
-
-	return strings.ReplaceAll(string(result), " ", "")
-}
-
-func playfair_encrypt(data string, key string) (res string) {
-	var result []rune
-	data = playfair_Preprocess(data)
-	matrix, pos := playfair_buildMatrix(key)
-	fmt.Println(pos)
-
-	for i := 0; i < len(data); i += 2 {
-		a, b := rune(data[i]), rune(data[i+1])
-		r1, c1 := pos[a][0], pos[a][1]
-		r2, c2 := pos[b][0], pos[b][1]
-
-		var x, y rune
-		switch {
-		case r1 == r2:
-			x = matrix[r1][(c1+1)%5]
-			y = matrix[r2][(c2+1)%5]
-		case c1 == c2:
-			x = matrix[(r1+1)%5][c1]
-			y = matrix[(r2+1)%5][c2]
-		default:
-			x = matrix[r1][c2]
-			y = matrix[r2][c1]
-		}
-		result = append(result, x, y)
-	}
-
-	return string(result)
-}
-func S_DES_KeyLL(key []byte, shiftCount int) [5]byte {
-	length := len(key)
-	reslut := make([]byte, length)
-
-	for i := 0; i < length; i++ {
-		reslut[i] = key[(i+shiftCount)%length]
-	}
-	var out [5]byte
-	copy(out[:], reslut)
-	return out
-}
-
-func S_DES_P8(key []byte) [8]byte {
-
-	P8 := [8]int{5, 2, 6, 3, 7, 4, 9, 8}
-
-	var result [8]byte
-	for i, pos := range P8 {
-		result[i] = key[pos]
-	}
-	return result
-}
-
-func S_DESBuildKeys(key [10]byte) map[string][]byte {
-	P10 := [10]int{2, 4, 1, 6, 3, 9, 0, 8, 7, 5}
-
-	var newKey [10]byte
-
-	for i, pos := range P10 {
-		newKey[i] = key[pos]
-	}
-
-	L1 := newKey[:5]
-	R1 := newKey[5:]
-	LL1 := S_DES_KeyLL(L1, 1)
-	RR1 := S_DES_KeyLL(R1, 1)
-
-	combined := append(LL1[:], RR1[:]...)
-	P8_KEY1 := S_DES_P8(combined)
-
-	LL2 := S_DES_KeyLL(LL1[:], 2)
-	RR2 := S_DES_KeyLL(RR1[:], 2)
-	combined2 := append(LL2[:], RR2[:]...)
-	P8_KEY2 := S_DES_P8(combined2)
-
-	return map[string][]byte{"k1": P8_KEY1[:], "k2": P8_KEY2[:]}
-}
-
-func S_DESBuildData(data [8]byte) (result [8]byte) {
-	IP := [8]int{1, 5, 2, 0, 3, 7, 4, 6}
-
-	for i, p := range IP {
-		result[i] = data[p]
-	}
-
-	return result
-}
-
-func S_DES_EP(bin []byte, key []byte) [8]byte {
-	EP := [8]byte{3, 0, 1, 2, 1, 2, 3, 0}
-
-	var EP_1 [8]byte
-	for i, p := range EP {
-		EP_1[i] = bin[p] ^ key[i]
-	}
-
-	return EP_1
-}
-
-func S_DES_S(bin []byte, S [4][4]byte) [2]byte {
-	row := bin[0]*2 + bin[3]
-	col := bin[1]*2 + bin[2]
-
-	val := S[row][col]
-
-	return [2]byte{(val >> 1) & 1, val & 1}
-}
-
-func S_DES_F(bin [8]byte, key []byte) [8]byte {
-	EPout := S_DES_EP(bin[4:], key)
-	var S0 = [4][4]byte{
-		{1, 0, 3, 2},
-		{3, 2, 1, 0},
-		{0, 2, 1, 3},
-		{3, 1, 3, 2},
-	}
-
-	var S1 = [4][4]byte{
-		{0, 1, 2, 3},
-		{2, 0, 1, 3},
-		{3, 0, 1, 0},
-		{2, 1, 0, 3},
-	}
-
-	S0out := S_DES_S(EPout[:4], S0)
-	S1out := S_DES_S(EPout[4:], S1)
-
-	preP4 := [4]byte{S0out[0], S0out[1], S1out[0], S1out[1]}
-	P4 := [4]byte{1, 3, 2, 0}
-
-	var out [4]byte
-	for i, p := range P4 {
-		out[i] = preP4[p]
-	}
-
-	L1 := [4]byte{}
-	for i := 0; i < 4; i++ {
-		L1[i] = bin[i] ^ out[i]
-	}
-	R1 := bin[4:]
-
-	result := [8]byte{}
-	copy(result[:4], L1[:])
-	copy(result[4:], R1)
-
-	fmt.Println(result)
-
-	return result
-}
-
-func S_DES_IP_1(fout []byte) []byte {
-	IPinv := [8]int{3, 0, 2, 4, 6, 1, 7, 5}
-	var ciphertext [8]byte
-	for i, p := range IPinv {
-		ciphertext[i] = fout[p]
-	}
-	return ciphertext[:]
-}
-
-func S_DES(text byte, key [10]byte) []byte {
-	keys := S_DESBuildKeys(key)
-
-	var bin [8]uint8
-
-	for i := 0; i < 8; i++ {
-		bin[i] = (text >> (7 - i)) & 1
-	}
-
-	data := S_DESBuildData(bin)
-
-	Fout := S_DES_F(data, keys["k1"])
-	swapped := [8]byte{}
-	copy(swapped[:4], Fout[4:])
-	copy(swapped[4:], Fout[:4])
-	F2out := S_DES_F(swapped, keys["k2"])
-
-	return S_DES_IP_1(F2out[:])
-}
-
+### 我的代码
+```go
 var sbox = [256]byte{
 	0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5,
 	0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
@@ -343,27 +49,6 @@ var sbox = [256]byte{
 	0x8c, 0xa1, 0x89, 0x0d, 0xbf, 0xe6, 0x42, 0x68,
 	0x41, 0x99, 0x2d, 0x0f, 0xb0, 0x54, 0xbb, 0x16,
 }
-
-// --- 在文件顶部或合适位置放 SBox / InvSBox ---
-var invSbox = [256]byte{
-	0x52, 0x09, 0x6A, 0xD5, 0x30, 0x36, 0xA5, 0x38, 0xBF, 0x40, 0xA3, 0x9E, 0x81, 0xF3, 0xD7, 0xFB,
-	0x7C, 0xE3, 0x39, 0x82, 0x9B, 0x2F, 0xFF, 0x87, 0x34, 0x8E, 0x43, 0x44, 0xC4, 0xDE, 0xE9, 0xCB,
-	0x54, 0x7B, 0x94, 0x32, 0xA6, 0xC2, 0x23, 0x3D, 0xEE, 0x4C, 0x95, 0x0B, 0x42, 0xFA, 0xC3, 0x4E,
-	0x08, 0x2E, 0xA1, 0x66, 0x28, 0xD9, 0x24, 0xB2, 0x76, 0x5B, 0xA2, 0x49, 0x6D, 0x8B, 0xD1, 0x25,
-	0x72, 0xF8, 0xF6, 0x64, 0x86, 0x68, 0x98, 0x16, 0xD4, 0xA4, 0x5C, 0xCC, 0x5D, 0x65, 0xB6, 0x92,
-	0x6C, 0x70, 0x48, 0x50, 0xFD, 0xED, 0xB9, 0xDA, 0x5E, 0x15, 0x46, 0x57, 0xA7, 0x8D, 0x9D, 0x84,
-	0x90, 0xD8, 0xAB, 0x00, 0x8C, 0xBC, 0xD3, 0x0A, 0xF7, 0xE4, 0x58, 0x05, 0xB8, 0xB3, 0x45, 0x06,
-	0xD0, 0x2C, 0x1E, 0x8F, 0xCA, 0x3F, 0x0F, 0x02, 0xC1, 0xAF, 0xBD, 0x03, 0x01, 0x13, 0x8A, 0x6B,
-	0x3A, 0x91, 0x11, 0x41, 0x4F, 0x67, 0xDC, 0xEA, 0x97, 0xF2, 0xCF, 0xCE, 0xF0, 0xB4, 0xE6, 0x73,
-	0x96, 0xAC, 0x74, 0x22, 0xE7, 0xAD, 0x35, 0x85, 0xE2, 0xF9, 0x37, 0xE8, 0x1C, 0x75, 0xDF, 0x6E,
-	0x47, 0xF1, 0x1A, 0x71, 0x1D, 0x29, 0xC5, 0x89, 0x6F, 0xB7, 0x62, 0x0E, 0xAA, 0x18, 0xBE, 0x1B,
-	0xFC, 0x56, 0x3E, 0x4B, 0xC6, 0xD2, 0x79, 0x20, 0x9A, 0xDB, 0xC0, 0xFE, 0x78, 0xCD, 0x5A, 0xF4,
-	0x1F, 0xDD, 0xA8, 0x33, 0x88, 0x07, 0xC7, 0x31, 0xB1, 0x12, 0x10, 0x59, 0x27, 0x80, 0xEC, 0x5F,
-	0x60, 0x51, 0x7F, 0xA9, 0x19, 0xB5, 0x4A, 0x0D, 0x2D, 0xE5, 0x7A, 0x9F, 0x93, 0xC9, 0x9C, 0xEF,
-	0xA0, 0xE0, 0x3B, 0x4D, 0xAE, 0x2A, 0xF5, 0xB0, 0xC8, 0xEB, 0xBB, 0x3C, 0x83, 0x53, 0x99, 0x61,
-	0x17, 0x2B, 0x04, 0x7E, 0xBA, 0x77, 0xD6, 0x26, 0xE1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0C, 0x7D,
-}
-
 var rcon = [11]byte{0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1B, 0x36}
 
 func xtime(a byte) byte {
@@ -374,7 +59,6 @@ func xtime(a byte) byte {
 }
 
 // multiply in GF(2^8) for small constants (1,2,3,9,11,13,14)
-
 func gmul(a, b byte) byte {
 	var res byte = 0
 	var temp byte = a
@@ -618,20 +302,6 @@ func IntersectSlices(sets [][]byte) []byte {
 	sort.Slice(res, func(i, j int) bool { return res[i] < res[j] })
 	return res
 }
-
-func dfa_try() {
-	// ------------- 这里是你给的例子 -------------
-	C0 := byte(57)   // 正确密文该字节（示例）
-	Cf0 := byte(206) // 错误密文该字节（示例）
-	delta := byte(0x02)
-
-	// 单样本候选
-	cands := RecoverCandidatesForByte(C0, Cf0, delta)
-	for _, b := range cands {
-		fmt.Printf("候选key 0x%02x \n", b)
-	}
-}
-
 func AES(key string, data string) string {
 	dataBytes := []byte{0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d, 0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34}
 	keyBytes := []byte{0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c}
@@ -686,7 +356,6 @@ func AES(key string, data string) string {
 		}
 		fmt.Printf("-------------------%d-------------------------\n", 10)
 		fmt.Println("Block => ", block)
-		block[0] ^= 0x3
 		fmt.Println("Block_DFA => ", block)
 		bm := AES_ByteMatrix(block)
 		fmt.Println("AES_ByteMatrix => ", bm)
@@ -706,58 +375,10 @@ func AES(key string, data string) string {
 
 	return string(result)
 }
-func verifyWithStdlib(key, data string) {
-	keyBytes := []byte(key)
-	dataBytes := []byte(data)
 
-	// 使用标准库AES
-	block, _ := aes.NewCipher(keyBytes)
-	encrypted := make([]byte, 16)
-	block.Encrypt(encrypted, dataBytes)
-
-	fmt.Printf("标准库结果 (Hex): %s\n", hex.EncodeToString(encrypted))
-	fmt.Printf("标准库结果 (Base64): %s\n", base64.StdEncoding.EncodeToString(encrypted))
-
-	// 你的实现
-	yourResult := AES(key, data)
-	fmt.Printf("你的结果 (Hex): %s\n", hex.EncodeToString([]byte(yourResult)))
-	fmt.Printf("你的结果 (Base64): %s\n", base64.StdEncoding.EncodeToString([]byte(yourResult)))
-
-	// 比较
-	if hex.EncodeToString(encrypted) == hex.EncodeToString([]byte(yourResult)) {
-		fmt.Println("✅ 实现正确！")
-	} else {
-		fmt.Println("❌ 实现有误")
-	}
-}
-
-func main() {
-	// data := []byte("Hello World!")
-	// encoded := EncodeBase64(data)
-	// fmt.Println(encoded)
-
-	// data := "duck"
-	// Caesar_Cipher(data)
-
-	// fmt.Println(Vigenère_Cipher("DUCK", "KEY"))
-
-	// fmt.Println(playfair_encrypt("HELLO WORLD", "PLAYFAIR EXAMPLE"))
-
-	// key := [10]byte{1, 0, 1, 0, 0, 0, 0, 0, 1, 0}
-	// reslut := S_DES('d', key)
-	//
-	// var val byte
-	// for i := 0; i < 8; i++ {
-	// 	val <<= 1
-	// 	val |= reslut[i]
-	// }
-	// letter := 'A' + val%26
-	// fmt.Printf("%c\n", letter)
-
+fun main() {
 	key := "1234567890123456"
 	data := "HelloAES12345678"
 	AES(key, data)
-
-	// verifyWithStdlib(key, data)
-	dfa_try()
 }
+```
