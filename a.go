@@ -731,6 +731,39 @@ func verifyWithStdlib(key, data string) {
 	}
 }
 
+func gcd(a, b int) {
+	for b != 0 {
+		a, b = b, a%b
+	}
+
+	fmt.Println(a)
+}
+
+func gcd2(x, y int) (a, b, c int) {
+	// x = 30
+	// y = 12
+	x0, x1 := 1, 0 // 用 1 个 A + 0 个 B = 30
+	y0, y1 := 0, 1 // 用 0 个 A + 1 个 B = 12
+
+	for y != 0 {
+		q := x / y
+		// 大堆 30，减去两(2的由来)堆小堆 12 → 剩余 6
+		// 12 / 6 = 2
+		x, y = y, x%y
+		// 12 6
+		// 6 0
+
+		x0, x1 = x1, x0-q*x1
+		//        0  1
+		//        1  0
+		y0, y1 = y1, y0-q*y1
+		//       1   -2
+		//       -2  -4
+	}
+
+	return x, x0, y0
+}
+
 func main() {
 	// data := []byte("Hello World!")
 	// encoded := EncodeBase64(data)
@@ -754,10 +787,11 @@ func main() {
 	// letter := 'A' + val%26
 	// fmt.Printf("%c\n", letter)
 
-	key := "1234567890123456"
-	data := "HelloAES12345678"
-	AES(key, data)
+	// key := "1234567890123456"
+	// data := "HelloAES12345678"
+	// AES(key, data)
 
 	// verifyWithStdlib(key, data)
-	dfa_try()
+	// dfa_try()
+	gcd2(30, 12)
 }

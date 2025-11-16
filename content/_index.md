@@ -3,7 +3,7 @@ title: I'm Duck
 toc: false
 ---
 <br>
-<div align="center">表面工程难以维护，UI看的过去就行了</div>
+<div align="center">指令与密文之下的世界，比界面更复杂，也更值得探索——这里记录着对系统深度理解的尝试</div>
 
 ![bg](../../wallhaven-85zooo_1920x1080.png)
 
