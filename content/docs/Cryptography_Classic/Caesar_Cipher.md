@@ -1,7 +1,6 @@
 ---
 title: 恺撒密码
 type: docs
-prev: docs/base64
 ---
 ![Caesar_Cipher](../../../Caesar_Cipher_bg.png)
 今天来学习的`恺撒密码`，恺撒密码，这个对比base64就要简单的多了，这个纯就是字母之间的转化，标准恺撒是没有对数字进行操作的</br>

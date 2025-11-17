@@ -12,16 +12,14 @@ prev: docs
 
 下面是本博客计划覆盖的古典密码学条目（按计划逐步实现并分析）：
 
-0. base64编码 这个各位可以考虑到现代密码时候再学习
+0. base64编码 这个各位可以考虑到现代密码时候再学习 -> 已经完成
 1. Caesar（凯撒密码）-> 已经完成
-2. Vigenère（维吉尼亚密码）
-3. Playfair
-4. Hill Cipher
-5. 置换密码（Permutation Cipher）
-6. 单表代换密码（Monoalphabetic Substitution）
-7. 多表代换密码（Polyalphabetic Substitution）
-8. 栅栏密码（Rail Fence Cipher）
-9. 仿射密码（Affine Cipher）
-10. Baconian Cipher（培根密码）
+2. Vigenère（维吉尼亚密码）-> 已经完成
+3. Playfair -> 已经完成
+4. Hill Cipher -> 已经完成
+5. 置换密码（Permutation Cipher）-> 已经完成
+<!-- 6. 栅栏密码（Rail Fence Cipher）-> 已经完成 -->
+<!-- 7. 仿射密码（Affine Cipher）-> 已经完成 -->
+8. Baconian Cipher（培根密码）-> 已经完成
 
 现代密码学相关内容会在后续章节陆续展开，届时会介绍对称加密、哈希函数、公钥密码等更实用的内容，并结合实现、攻击与逆向分析来讲解。
