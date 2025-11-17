@@ -21,12 +21,6 @@ languages:
   zh:
     languageName: 中文
     weight: 1
-  en:
-    languageName: English
-    weight: 2
-  ja:
-    languageName: 日本語
-    weight: 3
 
 menu:
   main:
