@@ -9,20 +9,42 @@ toc: false
 **目标读者：** 已经完成古典密码学练习,并希望把重点放在实现,逆向与漏洞识别的读者
 {{< /callout >}}
 
-- 对称加密（AES 系列 -> ECB / CBC / CTR / GCM / XTS）
-  - AES-128 / AES-192 / AES-256
-  - 模式：ECB（示例/问题）、CBC（padding & oracle）、CTR（流化、nonce 要求）、GCM（AEAD，nonce 管理）、XTS（磁盘加密场景）
+### **1. 对称加密（Symmetric Ciphers）**
+1. DES  
+2. 3DES  
+3. AES-ECB  
+4. AES-CBC  
+5. AES-CTR  
+6. AES-GCM  
+7. ChaCha20  
+8. ChaCha20-Poly1305（AEAD）  
+9. RC4（已不安全）  
+10. SM4（国密）
 
-- 哈希与消息认证（MD5 / SHA-1 / SHA-2 / SHA-3 => HMAC 版本）
-  - MD5（历史/已破坏的碰撞示例）
-  - SHA-1（弱化历史与现实影响）
-  - SHA-2：SHA-224 / SHA-256 / SHA-384 / SHA-512（压缩函数与应用）
-  - SHA-3 / Keccak（Sponge 结构）
-  - HMAC（基于上述哈希的消息认证构造；用法与陷阱）
+### **2. 非对称加密（Public-Key / Asymmetric）**
+11. RSA（加密/签名）  
+12. ElGamal  
+13. Diffie–Hellman（DH）  
+14. ECC 通用（椭圆曲线密码）  
+15. ECDH（密钥交换）  
+16. ECDSA（签名）  
+17. Ed25519（签名）  
+18. X25519（密钥交换）  
+19. SM2（国密）
 
-- 公钥密码学（RSA）
-  - RSA 加密 / 解密（模幂、填充：PKCS#1 v1.5 / OAEP）
-  - RSA 签名（PKCS#1 v1.5 / PSS）
-  - 实现注意：模幂实现指纹、大整数库调用、常见漏洞（填充 oracle、低指数攻击）
----
-暂时列举，后续还会有一些算法，请等待笔者学习
+### **3. 哈希函数（Hash Functions）**
+20. MD5（不安全，了解即可）  
+21. SHA-1（不安全）  
+22. SHA-256  
+23. SHA-512  
+24. SHA-3（Keccak）  
+25. BLAKE2  
+26. SM3（国密）
+
+### **4. 消息认证码 MAC**
+27. HMAC  
+28. CMAC（AES）
+
+### **5. 密钥派生函数 KDF**
+29. PBKDF2  
+30. HKDF

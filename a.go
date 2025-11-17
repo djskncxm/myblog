@@ -787,9 +787,9 @@ func main() {
 	// letter := 'A' + val%26
 	// fmt.Printf("%c\n", letter)
 
-	// key := "1234567890123456"
-	// data := "HelloAES12345678"
-	// AES(key, data)
+	key := "1234567890123456"
+	data := "HelloAES12345678"
+	AES(key, data)
 
 	// verifyWithStdlib(key, data)
 	// dfa_try()
