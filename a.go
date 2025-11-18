@@ -686,7 +686,7 @@ func AES(key string, data string) string {
 		}
 		fmt.Printf("-------------------%d-------------------------\n", 10)
 		fmt.Println("Block => ", block)
-		block[0] ^= 0x3
+		// block[0] ^= 0x3
 		fmt.Println("Block_DFA => ", block)
 		bm := AES_ByteMatrix(block)
 		fmt.Println("AES_ByteMatrix => ", bm)

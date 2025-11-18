@@ -16,8 +16,8 @@ toc: false
 2. 3DES -> 这个不是很想写了(因为学过DES和AES了)
 3. AES-ECB -> 已经完成
 4. AES-CBC -> 已经完成
-5. AES-CTR
-6. AES-GCM
+5. AES-CTR -> 已经完成
+6. AES-GCM -> 已经完成
 7. ChaCha20
 8. ChaCha20-Poly1305(AEAD)
 9. RC4(已不安全)
