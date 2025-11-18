@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/aes"
 	"encoding/base64"
+	"encoding/binary"
 	"encoding/hex"
 	"fmt"
 	"sort"
@@ -731,37 +732,108 @@ func verifyWithStdlib(key, data string) {
 	}
 }
 
-func gcd(a, b int) {
-	for b != 0 {
-		a, b = b, a%b
-	}
-
-	fmt.Println(a)
+func ChaCha20Rotl(x uint32, n uint) uint32 {
+	return (x << n) | (x >> (32 - n))
 }
 
-func gcd2(x, y int) (a, b, c int) {
-	// x = 30
-	// y = 12
-	x0, x1 := 1, 0 // 用 1 个 A + 0 个 B = 30
-	y0, y1 := 0, 1 // 用 0 个 A + 1 个 B = 12
+func ChaCha20quarterRound(a, b, c, d *uint32) {
+	*a += *b
+	*d ^= *a
+	*d = ChaCha20Rotl(*d, 16)
 
-	for y != 0 {
-		q := x / y
-		// 大堆 30，减去两(2的由来)堆小堆 12 → 剩余 6
-		// 12 / 6 = 2
-		x, y = y, x%y
-		// 12 6
-		// 6 0
+	*c += *d
+	*b ^= *c
+	*b = ChaCha20Rotl(*b, 12)
 
-		x0, x1 = x1, x0-q*x1
-		//        0  1
-		//        1  0
-		y0, y1 = y1, y0-q*y1
-		//       1   -2
-		//       -2  -4
+	*a += *b
+	*d ^= *a
+	*d = ChaCha20Rotl(*d, 8)
+
+	*c += *d
+	*b ^= *c
+	*b = ChaCha20Rotl(*b, 7)
+}
+
+func ChaCha20InitState(key, nonce []byte, counter uint32) [16]uint32 {
+	if len(key) != 32 {
+		panic("key must be 32 bytes")
+	}
+	if len(nonce) != 12 {
+		panic("nonce must be 12 bytes")
 	}
 
-	return x, x0, y0
+	var st [16]uint32
+
+	// constants
+	st[0] = binary.LittleEndian.Uint32([]byte("expa"))
+	st[1] = binary.LittleEndian.Uint32([]byte("nd 3"))
+	st[2] = binary.LittleEndian.Uint32([]byte("2-by"))
+	st[3] = binary.LittleEndian.Uint32([]byte("te k"))
+
+	for i := 0; i < 8; i++ {
+		st[4+i] = binary.LittleEndian.Uint32(key[i*4 : (i+1)*4])
+	}
+	st[12] = counter
+
+	st[13] = binary.LittleEndian.Uint32(nonce[0:4])
+	st[14] = binary.LittleEndian.Uint32(nonce[4:8])
+	st[15] = binary.LittleEndian.Uint32(nonce[8:12])
+
+	return st
+}
+
+func ChaCha20Block(state [16]uint32) [64]byte {
+	var work [16]uint32
+	copy(work[:], state[:])
+
+	for i := 0; i < 10; i++ {
+		ChaCha20quarterRound(&work[0], &work[4], &work[8], &work[12])
+		ChaCha20quarterRound(&work[1], &work[5], &work[9], &work[13])
+		ChaCha20quarterRound(&work[2], &work[6], &work[10], &work[14])
+		ChaCha20quarterRound(&work[3], &work[7], &work[11], &work[15])
+
+		ChaCha20quarterRound(&work[0], &work[5], &work[10], &work[15])
+		ChaCha20quarterRound(&work[1], &work[6], &work[11], &work[12])
+		ChaCha20quarterRound(&work[2], &work[7], &work[8], &work[13])
+		ChaCha20quarterRound(&work[3], &work[4], &work[9], &work[14])
+	}
+
+	var out [64]byte
+
+	for i := 0; i < 16; i++ {
+		val := work[i] + state[i]
+		binary.LittleEndian.PutUint32(out[i*4:(i+1)*4], val)
+	}
+	return out
+}
+
+func ChaCha20(key, nonce, in []byte, counter uint32) []byte {
+	out := make([]byte, len(in))
+	st := ChaCha20InitState(key, nonce, counter)
+
+	var BlockCounter uint32 = 0
+	pos := 0
+	remaining := len(in)
+
+	for remaining > 0 {
+		st[12] = counter + BlockCounter
+		ks := ChaCha20Block(st)
+
+		n := 64
+
+		if remaining < 64 {
+			n = remaining
+		}
+
+		for i := 0; i < n; i++ {
+			out[pos+i] = in[pos+i] ^ ks[i]
+		}
+
+		remaining -= n
+		pos += n
+		BlockCounter++
+	}
+	return out
 }
 
 func main() {
@@ -787,11 +859,22 @@ func main() {
 	// letter := 'A' + val%26
 	// fmt.Printf("%c\n", letter)
 
-	key := "1234567890123456"
-	data := "HelloAES12345678"
-	AES(key, data)
+	// key := "1234567890123456"
+	// data := "HelloAES12345678"
+	// AES(key, data)
 
 	// verifyWithStdlib(key, data)
 	// dfa_try()
-	gcd2(30, 12)
+
+	key, _ := hex.DecodeString("000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f")
+	nonce, _ := hex.DecodeString("000000090000004a00000000")
+
+	plaintext := []byte("Hello ChaCha20")
+	fmt.Println("plaintext:", string(plaintext))
+
+	cipher := ChaCha20(key, nonce, plaintext, 1)
+	fmt.Println("cipher hex:", hex.EncodeToString(cipher))
+
+	restore := ChaCha20(key, nonce, cipher, 1)
+	fmt.Println("restore:", string(restore))
 }

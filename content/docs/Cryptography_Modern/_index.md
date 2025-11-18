@@ -18,7 +18,7 @@ toc: false
 4. AES-CBC -> 已经完成
 5. AES-CTR -> 已经完成
 6. AES-GCM -> 已经完成
-7. ChaCha20
+7. ChaCha20 -> 已经完成
 8. ChaCha20-Poly1305(AEAD)
 9. RC4(已不安全)
 10. SM4(国密)

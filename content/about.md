@@ -20,6 +20,14 @@ MySQL Redis SQLlite3
 熟悉 Manjaro、Ubuntu、Arch、Kali 等 Linux 系统<br>
 能在 Linux 环境中完成项目开发、Docker 基础使用与简单系统维护<br>
 
+### 密码学与加密算法
+- 扎实的现代密码学基础：分组密码、分组模式、流密码、哈希、密钥扩展
+- 手动实现 AES-128 ECB/CBC，理解 S 盒、Rcon、KeySchedule
+- 了解 ChaCha20/Poly1305、CTR、GCM 等现代算法基本结构
+- 掌握 Web 加密常见算法：AES、RSA、ECC、HMAC、Base64、MD5、SM 系列
+- 具备差分攻击（DFA）理论学习能力，并已基于自写 AES 进行实验
+- 熟悉 Android 中白盒 AES、壳加密、动态解密流程
+
 ---
 # 项目经验
 #### CHTTPServer（学习中开发项目）
