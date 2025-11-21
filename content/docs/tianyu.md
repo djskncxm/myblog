@@ -57,7 +57,7 @@ captchaId token length version width report tracking
 至此auth字段我们分析完毕接下来就是开始逆向了
 # 逆向代码
 ### auth接口的构造
-我们直接邮件复制然后复制出来curl即可，找个curl转朋友直接转成requests的代码就可以了
+我们直接邮件复制然后复制出来curl即可，找个curl直接转成requests的代码就可以了
 ```py
 def GetImg():
     url = "https://captcha.jiagu.360.cn/api/v3/auth"
