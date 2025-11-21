@@ -21,7 +21,7 @@ toc: false
 7. ChaCha20 -> 已经完成
 8. ChaCha20-Poly1305(AEAD) -> 已经完成
 9. RC4(已不安全) -> 已经完成
-10. SM4(国密)
+10. SM4(国密) -> 已经完成
 
 ### **2. 非对称加密(Public-Key / Asymmetric)**
 
