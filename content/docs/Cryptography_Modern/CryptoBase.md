@@ -73,3 +73,46 @@ type: docs
 ```
 # 模运算 (Modular Arithmetic)
 
+# 欧几里得算法
+```text
+gcd(a,b)
+if a > b:
+    a / b % x
+    b / x % y
+    if y == 0:
+        return x
+    else
+        x / y % z
+        ....
+
+gcd(a, b):
+    while b ≠ 0:
+        r = a mod b
+        a = b
+        b = r
+    return a
+```
+
+拓展欧几里得
+
+```text
+函数 gcd_extended(a, b):
+    输入：两个整数 a, b
+    输出：三元组 (gcd, x, y)，满足 a*x + b*y = gcd
+    
+    步骤：
+    1. 如果 b == 0:
+        - 此时 gcd(a, 0) = a
+        - 因为 a*1 + 0*0 = a，所以返回 (a, 1, 0)
+        
+    2. 否则（b ≠ 0）:
+        a. 递归调用：gcd, x1, y1 = gcd_extended(b, a % b)
+           - 这里我们计算更小规模的 gcd(b, a % b)
+           - 并得到对应的系数 x1, y1，满足：b*x1 + (a % b)*y1 = gcd
+           
+        b. 计算当前层的系数 x 和 y:
+           - x = y1
+           - y = x1 - (a // b) * y1
+           
+        c. 返回 (gcd, x, y)
+```

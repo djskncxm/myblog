@@ -1,9 +1,11 @@
 package main
 
 import (
+	"crypto/rand"
 	"crypto/aes"
 	"encoding/base64"
 	"encoding/binary"
+	"math/big"
 	"encoding/hex"
 	"fmt"
 	"sort"
@@ -954,6 +956,108 @@ func decryptBlock(ciphertext []byte, rk [32]uint32) []byte {
 	return encryptBlock(ciphertext, rkInv)
 }
 
+// DHKey 包含 Diffie-Hellman 的密钥对
+type DHKey struct {
+	PrivateKey *big.Int
+	PublicKey  *big.Int
+}
+
+// GenerateDHKey 生成 Diffie-Hellman 密钥对
+// p: 大质数, g: 生成元
+func GenerateDHKey(p, g *big.Int) (*DHKey, error) {
+	// 生成私钥：一个随机的大整数，范围 [1, p-2]
+	// p-2 是因为私钥不能为0，且应该小于 p-1 以确保安全性
+	privateKey, err := rand.Int(rand.Reader, new(big.Int).Sub(p, big.NewInt(2)))
+	if err != nil {
+		return nil, err
+	}
+	// 私钥至少为1
+	privateKey.Add(privateKey, big.NewInt(1))
+
+	// 计算公钥：g^privateKey mod p
+	publicKey := new(big.Int).Exp(g, privateKey, p)
+
+	return &DHKey{
+		PrivateKey: privateKey,
+		PublicKey:  publicKey,
+	}, nil
+}
+
+// ComputeSharedSecret 计算共享密钥
+// 使用自己的私钥和对方的公钥
+func ComputeSharedSecret(privateKey, otherPublicKey, p *big.Int) *big.Int {
+	// sharedSecret = otherPublicKey^privateKey mod p
+	return new(big.Int).Exp(otherPublicKey, privateKey, p)
+}
+
+func DH() {
+	// 1. 双方约定公共参数
+	// 在实际应用中，这些参数通常是标准化的（如 RFC 3526 中定义）
+	// 这里我们使用一个相对较小的质数作为示例（实际应用要用2048位或更大的质数）
+	
+	// p: 一个大质数
+	p := big.NewInt(23) // 示例使用小质数，实际要用非常大的质数
+	
+	// g: 生成元，通常是2或者5
+	g := big.NewInt(5)
+
+	fmt.Printf("公共参数:\n")
+	fmt.Printf("  质数 p = %s\n", p.String())
+	fmt.Printf("  生成元 g = %s\n", g.String())
+	fmt.Println()
+
+	// 2. Alice 生成密钥对
+	aliceKey, err := GenerateDHKey(p, g)
+	if err != nil {
+		fmt.Printf("Alice 密钥生成失败: %v\n", err)
+		return
+	}
+	fmt.Printf("Alice:\n")
+	fmt.Printf("  私钥 a = %s (保密)\n", aliceKey.PrivateKey.String())
+	fmt.Printf("  公钥 A = g^a mod p = %s (公开)\n", aliceKey.PublicKey.String())
+	fmt.Println()
+
+	// 3. Bob 生成密钥对
+	bobKey, err := GenerateDHKey(p, g)
+	if err != nil {
+		fmt.Printf("Bob 密钥生成失败: %v\n", err)
+		return
+	}
+	fmt.Printf("Bob:\n")
+	fmt.Printf("  私钥 b = %s (保密)\n", bobKey.PrivateKey.String())
+	fmt.Printf("  公钥 B = g^b mod p = %s (公开)\n", bobKey.PublicKey.String())
+	fmt.Println()
+
+	// 4. 双方交换公钥后计算共享密钥
+
+	// Alice 使用自己的私钥和 Bob 的公钥计算共享密钥
+	aliceSharedSecret := ComputeSharedSecret(aliceKey.PrivateKey, bobKey.PublicKey, p)
+	fmt.Printf("Alice 计算的共享密钥:\n")
+	fmt.Printf("  s = B^a mod p = %s\n", aliceSharedSecret.String())
+	fmt.Println()
+
+	// Bob 使用自己的私钥和 Alice 的公钥计算共享密钥
+	bobSharedSecret := ComputeSharedSecret(bobKey.PrivateKey, aliceKey.PublicKey, p)
+	fmt.Printf("Bob 计算的共享密钥:\n")
+	fmt.Printf("  s = A^b mod p = %s\n", bobSharedSecret.String())
+	fmt.Println()
+
+	// 5. 验证双方计算的共享密钥是否相同
+	if aliceSharedSecret.Cmp(bobSharedSecret) == 0 {
+		fmt.Printf("✅ 成功！双方建立了相同的共享密钥: %s\n", aliceSharedSecret.String())
+		fmt.Printf("   这个密钥可以用于 AES 等对称加密\n")
+	} else {
+		fmt.Printf("❌ 错误！共享密钥不匹配\n")
+	}
+
+	// 6. 演示窃听者看到的信息
+	fmt.Println("\n--- 窃听者视角 ---")
+	fmt.Printf("能看到的信息: p=%s, g=%s\n", p.String(), g.String())
+	fmt.Printf("               Alice公钥 A=%s\n", aliceKey.PublicKey.String())
+	fmt.Printf("               Bob公钥 B=%s\n", bobKey.PublicKey.String())
+	fmt.Printf("无法得知: Alice私钥(a), Bob私钥(b), 共享密钥(s)\n")
+}
+
 func main() {
 	// data := []byte("Hello World!")
 	// encoded := EncodeBase64(data)
@@ -997,27 +1101,27 @@ func main() {
 	// fmt.Println("restore:", string(restore))
 
 	// test vector from SM4 specification:
-	keyHex := "0123456789abcdeffedcba9876543210"
-	ptHex := "0123456789abcdeffedcba9876543210"
-	expectedCtHex := "681edf34d206965e86b3e94f536e4246"
-
-	key, _ := hex.DecodeString(keyHex)
-	pt, _ := hex.DecodeString(ptHex)
-	// expectedCt, _ := hex.DecodeString(expectedCtHex)
-
-	rk := keySchedule(key)
-	ct := encryptBlock(pt, rk)
-	dt := decryptBlock(ct, rk)
-
-	fmt.Printf("Key: %s\n", keyHex)
-	fmt.Printf("Plain: %s\n", ptHex)
-	fmt.Printf("Expected CT: %s\n", expectedCtHex)
-	fmt.Printf("Got CT: %s\n", hex.EncodeToString(ct))
-	fmt.Printf("Decrypted: %s\n", hex.EncodeToString(dt))
-
-	if hex.EncodeToString(ct) == expectedCtHex {
-		fmt.Println("SM4 encrypt test: OK")
-	} else {
-		fmt.Println("SM4 encrypt test: FAIL")
-	}
+	// keyHex := "0123456789abcdeffedcba9876543210"
+	// ptHex := "0123456789abcdeffedcba9876543210"
+	// expectedCtHex := "681edf34d206965e86b3e94f536e4246"
+	//
+	// key, _ := hex.DecodeString(keyHex)
+	// pt, _ := hex.DecodeString(ptHex)
+	// // expectedCt, _ := hex.DecodeString(expectedCtHex)
+	//
+	// rk := keySchedule(key)
+	// ct := encryptBlock(pt, rk)
+	// dt := decryptBlock(ct, rk)
+	//
+	// fmt.Printf("Key: %s\n", keyHex)
+	// fmt.Printf("Plain: %s\n", ptHex)
+	// fmt.Printf("Expected CT: %s\n", expectedCtHex)
+	// fmt.Printf("Got CT: %s\n", hex.EncodeToString(ct))
+	// fmt.Printf("Decrypted: %s\n", hex.EncodeToString(dt))
+	//
+	// if hex.EncodeToString(ct) == expectedCtHex {
+	// 	fmt.Println("SM4 encrypt test: OK")
+	// } else {
+	// 	fmt.Println("SM4 encrypt test: FAIL")
+	// }
 }
