@@ -26,8 +26,8 @@ toc: false
 ### **2. 非对称加密(Public-Key / Asymmetric)**
 
 11. RSA(加密/签名)
-12. ElGamal
-13. Diffie–Hellman(DH) -> 已完成
+12. ElGamal -> 已经完成
+13. Diffie–Hellman(DH) -> 已经完成
 14. ECC 通用(椭圆曲线密码)
 15. ECDH(密钥交换)
 16. ECDSA(签名)

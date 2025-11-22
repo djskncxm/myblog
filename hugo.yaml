@@ -55,3 +55,7 @@ params:
   theme:
     default: dark
     displayToggle: true
+  math:
+    engine: katex
+    katex:
+      base: "https://cdn.jsdelivr.net/npm/katex@0.16.22/dist"
