@@ -1,6 +1,7 @@
 ---
 title: S-DES密码
 type: docs
+next: docs/Cryptography_Modern/AES
 ---
 ![s-des](../../../S_DES_bg.png)
 > 在数字安全的浩瀚星空中，总有一些算法如同恒星般闪耀——它们或许已不再用于实战，却永远照亮着前行的道路。S-DES，正是这样一颗永恒的启明星。

@@ -1,6 +1,7 @@
 ---
 title: AES -> 对称加密的风向标
 type: docs
+next: docs/Cryptography_Modern/AES_CBC
 ---
 
 ![bg](../../../wallhaven-85zooo_1920x1080.png)

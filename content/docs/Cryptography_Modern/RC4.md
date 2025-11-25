@@ -1,6 +1,7 @@
 ---
 title: RC4加密算法
 type: docs
+next: docs/Cryptography_Modern/SM4
 ---
 
 ![des](../../../foggy-city.jpg)

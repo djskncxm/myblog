@@ -1,6 +1,7 @@
 ---
 title: ChaCha20 加密
 type: docs
+next: docs/Cryptography_Modern/ChaCha20-Poly1305
 ---
 
 ![Modern_Cryptography](../../../droplets.png)

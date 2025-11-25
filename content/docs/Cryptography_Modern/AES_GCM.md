@@ -1,6 +1,7 @@
 ---
 title: AES_GCM加密
 type: docs
+next: docs/Cryptography_Modern/ChaCha20
 ---
 
 ![bg](../../../waves.png)

@@ -1,6 +1,7 @@
 ---
 title: AES_CTR加密
 type: docs
+next: docs/Cryptography_Modern/AES_GCM
 ---
 
 ![bg](../../../gingerbread-house.jpg)

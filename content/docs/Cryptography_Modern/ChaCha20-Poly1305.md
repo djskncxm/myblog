@@ -1,6 +1,7 @@
 ---
 title: ChaCha20-Poly1305加密
 type: docs
+next: docs/Cryptography_Modern/RC4
 ---
 ![bg](../../../soft-rose.jpg)
 

@@ -1,6 +1,7 @@
 ---
 title: AES_CBC加密
 type: docs
+next: docs/Cryptography_Modern/AES_CTR
 ---
 
 ![bg](../../../sousou-no-frieren-flowers.png)

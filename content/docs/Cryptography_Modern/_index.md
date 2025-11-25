@@ -1,6 +1,7 @@
 ---
 title: 现代密码学
 toc: false
+next: docs/Cryptography_Modern/S_DES
 ---
 
 ![Modern_Cryptography](../../../2025-10-31-22-24-38.png)
@@ -16,7 +17,7 @@ toc: false
 
 ### **1. 对称加密(Symmetric Ciphers)**
 
-1. DES -> 已经完成
+1. S-DES -> 已经完成
 2. 3DES -> 这个不是很想写了(因为学过DES和AES了)
 3. AES-ECB -> 已经完成
 4. AES-CBC -> 已经完成
@@ -37,7 +38,7 @@ toc: false
 16. ECDSA(签名) -> 已经完成
 17. Ed25519(签名) -> 已经完成
 18. X25519(密钥交换) -> 已经完成
-19. SM2(国密)
+19. SM2(国密) -> 已经完成
 
 ### **3. 哈希函数(Hash Functions)**
 
