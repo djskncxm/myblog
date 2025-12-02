@@ -10,5 +10,6 @@ toc: false
 {{< cards >}}
   {{< card link="docs" title="文章" icon="book-open" >}}
   {{< card link="about" title="关于我" icon="user" >}}
+  {{< card link="schedule" title="进度" icon="academic-cap" >}}
 {{< /cards >}}
 

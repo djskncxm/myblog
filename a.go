@@ -1070,16 +1070,16 @@ func main() {
 
 	// fmt.Println(playfair_encrypt("HELLO WORLD", "PLAYFAIR EXAMPLE"))
 
-	// key := [10]byte{1, 0, 1, 0, 0, 0, 0, 0, 1, 0}
-	// reslut := S_DES('d', key)
-	//
-	// var val byte
-	// for i := 0; i < 8; i++ {
-	// 	val <<= 1
-	// 	val |= reslut[i]
-	// }
-	// letter := 'A' + val%26
-	// fmt.Printf("%c\n", letter)
+	key := [10]byte{1, 0, 1, 0, 0, 1, 1, 1, 1, 0}
+	reslut := S_DES('d', key)
+
+	var val byte
+	for i := 0; i < 8; i++ {
+		val <<= 1
+		val |= reslut[i]
+	}
+	letter := 'A' + val%26
+	fmt.Printf("%c\n", letter)
 
 	// key := "1234567890123456"
 	// data := "HelloAES12345678"
