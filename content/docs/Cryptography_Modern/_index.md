@@ -44,7 +44,7 @@ next: docs/Cryptography_Modern/S_DES
 
 20. MD5(不安全，了解即可)
 21. SHA-1(不安全) -> 已经完成
-22. SHA-256
+22. SHA-256 -> 已经完成
 23. SHA-512
 24. SHA-3(Keccak)
 25. BLAKE2
