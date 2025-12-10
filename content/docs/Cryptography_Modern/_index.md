@@ -27,35 +27,37 @@ next: docs/Cryptography_Modern/S_DES
 8. ChaCha20-Poly1305(AEAD) -> 已经完成
 9. RC4(已不安全) -> 已经完成
 10. SM4(国密) -> 已经完成
+11. Salsa20
+12. TEA -> 已经完成
 
 ### **2. 非对称加密(Public-Key / Asymmetric)**
 
-11. RSA(加密/签名) -> 已经完成
-12. ElGamal -> 已经完成
-13. Diffie–Hellman(DH) -> 已经完成
-14. ECC 通用(椭圆曲线密码) -> 已经完成
-15. ECDH(密钥交换) -> 已经完成
-16. ECDSA(签名) -> 已经完成
-17. Ed25519(签名) -> 已经完成
-18. X25519(密钥交换) -> 已经完成
-19. SM2(国密) -> 已经完成
+1. RSA(加密/签名) -> 已经完成
+2. ElGamal -> 已经完成
+3. Diffie–Hellman(DH) -> 已经完成
+4. ECC 通用(椭圆曲线密码) -> 已经完成
+5. ECDH(密钥交换) -> 已经完成
+6. ECDSA(签名) -> 已经完成
+7. Ed25519(签名) -> 已经完成
+8. X25519(密钥交换) -> 已经完成
+9. SM2(国密) -> 已经完成
 
 ### **3. 哈希函数(Hash Functions)**
 
-20. MD5(不安全，了解即可)
-21. SHA-1(不安全) -> 已经完成
-22. SHA-256 -> 已经完成
-23. SHA-512
-24. SHA-3(Keccak)
-25. BLAKE2
-26. SM3(国密)
+0. MD5(不安全，了解即可)
+1. SHA-1(不安全) -> 已经完成
+2. SHA-256 -> 已经完成
+3. SHA-512 -> 已经完成
+4. SHA-3(Keccak)
+5. BLAKE2
+6. SM3(国密)
 
 ### **4. 消息认证码 MAC**
 
-27. HMAC
-28. CMAC(AES)
+1. HMAC
+2. CMAC(AES)
 
 ### **5. 密钥派生函数 KDF**
 
-29. PBKDF2
-30. HKDF
+1. PBKDF2
+2. HKDF
