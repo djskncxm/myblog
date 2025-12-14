@@ -48,9 +48,9 @@ next: docs/Cryptography_Modern/S_DES
 1. SHA-1(不安全) -> 已经完成
 2. SHA-256 -> 已经完成
 3. SHA-512 -> 已经完成
-4. SHA-3(Keccak)
+4. SHA-3(Keccak-256) -> 已经完成
 5. BLAKE2
-6. SM3(国密)
+6. SM3(国密) -> 已经完成
 
 ### **4. 消息认证码 MAC**
 
@@ -61,3 +61,4 @@ next: docs/Cryptography_Modern/S_DES
 
 1. PBKDF2
 2. HKDF
+3. Argon2
