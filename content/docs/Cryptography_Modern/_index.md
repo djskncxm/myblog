@@ -59,6 +59,8 @@ next: docs/Cryptography_Modern/S_DES
 
 ### **5. 密钥派生函数 KDF**
 
+这个写了点总结，并没有挨个写出来具体实现，主要是因为太单一了，几个东西完全一样
+
 1. PBKDF2
 2. HKDF
 3. Argon2
