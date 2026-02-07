@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/docs/Cryptography_Classic/1.Affine.md",
+                "file": "content/docs/Notes/LuaVM分析/6.指令集系列/0. 目标.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1.Affine"
+              "title": "0. 目标"
             }
           }
         ]
@@ -94,13 +94,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/docs/Cryptography_Classic/1.Affine.md",
+                "file": "content/docs/Notes/LuaVM分析/6.指令集系列/0. 目标.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "1.Affine 的大纲"
+              "title": "0. 目标 的大纲"
             }
           },
           {
@@ -186,19 +186,32 @@
   },
   "active": "1f660d8e5c82e9c1",
   "lastOpenFiles": [
+    "content/docs/Reverse/加固壳类分析/_index.md",
+    "content/docs/Docs/os/_index.md",
+    "content/docs/Docs/_index.md",
+    "content/docs/Projects/AndroidROM/OnePlus10维护LineageOS.md",
+    "content/docs/Projects/AndroidROM/_index.md",
+    "content/docs/Reverse/_index.md",
+    "public/docs/reverse/加固壳类分析/index.xml",
+    "public/docs/reverse/加固壳类分析/index.html",
+    "public/docs/reverse/加固壳类分析/_index.md/index.html",
+    "public/docs/reverse/加固壳类分析/_index.md",
+    "public/docs/reverse/加固壳类分析/未命名/index.html",
+    "public/docs/reverse/加固壳类分析/未命名",
+    "public/docs/reverse/加固壳类分析",
+    "content/_index.md",
+    "content/docs/Reverse/加固壳类分析",
+    "content/docs/Reverse/未命名.md",
+    "public/docs/reverse/未命名/index.html",
+    "public/docs/reverse/未命名",
+    "content/about.md",
+    "content/docs/Notes/LuaVM分析/6.指令集系列/0. 目标.md",
+    "content/docs/Notes/LuaVM分析/6.指令集系列/Level 5：表写入 + GC 写屏障.md",
     "public/docs/cryptography_classic/1.affine/index.html",
-    "public/docs/cryptography_classic/1.affine",
     "content/docs/Cryptography_Classic/_index.md",
     "content/docs/Cryptography_Classic/1.Affine.md",
-    "public/docs/cryptography_classic/index.xml",
-    "public/docs/cryptography_classic/index.html",
-    "public/docs/cryptography_classic/未命名/index.html",
-    "public/docs/cryptography_classic/未命名",
-    "public/docs/cryptography_classic",
     "content/docs/first-page.md",
-    "content/docs/Cryptography_Classic",
     "content/docs/_index.md",
-    "content/_index.md",
     "README.md",
     "6.指令集系列/Level 3：比较与条件跳转.md",
     "6.指令集系列/0. 目标.md",
@@ -209,20 +222,7 @@
     "6.指令集系列/Level 1：立即数_常量加载.md",
     "未命名.md",
     "5.lua字节码解析.md",
-    "ReleasePDF/PDF/6.指令集系列/1. 虚拟机入口和MOVE指令.pdf",
-    "ReleasePDF/PDF/6.指令集系列/0. 目标.pdf",
-    "ReleasePDF/PDF/6.指令集系列",
-    "4.Lua数据结构分析.md",
-    "3.浅尝辄止Lua虚拟机.md",
-    "2.虚拟机类型.md",
-    "1.LuaVM.md",
-    "zhuanma/README.md",
-    "知识分支闭环.md",
-    "Phase_1/Day16-2：ClassLoader加载链.md",
-    "安卓底层改机分析蓝队 · 半年系统学习路线.md",
     "Phase_1/20A09D48410C7896718A4F265E011860.jpg",
-    "Phase_1/Day16-1：dex文件解析.md",
-    "毕业检验项目：android_攻防蓝队系统化实战.md",
     "未命名.canvas"
   ]
 }

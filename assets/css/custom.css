@@ -1,0 +1,44 @@
+@import url("https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.6.0/style.css");
+
+body {
+  font-family:
+    "IosevkaFix",
+    "LXGW WenKai Lite",
+    "LXGW WenKai",
+    ui-monospace,
+    "PingFang SC",
+    "Hiragino Sans GB",
+    "Microsoft YaHei",
+    sans-serif;
+
+  font-feature-settings: "liga" 1, "calt" 1;
+  line-height: 1.65;
+}
+
+/* ================================
+   使用 Iosevka（带连字）作为代码字体
+   ================================ */
+
+@font-face {
+  font-family: "IosevkaFix";
+  src: url("https://www.programmingfonts.org/fonts/resources/iosevka/iosevka-italic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* 强制覆盖 Hextra / Shiki 的默认 monospace 字体 */
+pre,
+pre code,
+code {
+  font-family: "IosevkaFix", "Iosevka", "JetBrains Mono", monospace !important;
+  font-feature-settings: "liga" 1, "calt" 1;
+  font-variant-ligatures: contextual;
+}
+
+/* 让 Iosevka 的排版更好看（关键） */
+pre {
+  line-height: 1.5 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.01em;
+}
