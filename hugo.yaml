@@ -1,5 +1,4 @@
-# Hugo configuration file
-title: My Site
+title: DuckBlog
 
 # import hextra as module
 module:
@@ -16,31 +15,34 @@ markup:
   highlight:
     noClasses: false
 
+defaultContentLanguage: zh
+
+languages:
+  zh:
+    languageName: 中文
+    weight: 1
+
 menu:
   main:
-    - name: Docs
+    - name: 文章
       pageRef: /docs
       weight: 1
-    - name: About
+    - name: 关于我
       pageRef: /about
       weight: 2
-    - name: Contact ↗
-      url: "https://github.com/imfing"
-      weight: 3
-    - name: Search
+    - name: 搜索
       weight: 4
       params:
         type: search
     - name: GitHub
       weight: 5
-      url: "https://github.com/imfing/hextra-starter-template"
+      url: "https://github.com/djskncxm/"
       params:
         icon: github
-    - name: Twitter
-      weight: 6
-      url: "https://twitter.com/"
+    - name: Theme Toggle
       params:
-        icon: x-twitter
+        type: theme-toggle
+        label: true
 
 params:
   navbar:
@@ -48,9 +50,12 @@ params:
     displayLogo: false
 
   footer:
-    displayCopyright: false
+    displayCopyright: true
     displayPoweredBy: true
-
-  editURL:
-    enable: true
-    base: "https://github.com/imfing/hextra-starter-template/edit/main/content"
+  theme:
+    default: dark
+    displayToggle: true
+  math:
+    engine: katex
+    katex:
+      base: "https://cdn.jsdelivr.net/npm/katex@0.16.22/dist"
