@@ -1,0 +1,228 @@
+{
+  "main": {
+    "id": "774be38cc5c96bb2",
+    "type": "split",
+    "children": [
+      {
+        "id": "7883ea1d86ee3e76",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1f660d8e5c82e9c1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "content/docs/Cryptography_Classic/1.Affine.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "1.Affine"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "cc38c9775951b2e6",
+    "type": "split",
+    "children": [
+      {
+        "id": "52a5ce835c8ac5b8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4b5a59eef5ca5b9a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "a0668a53dd933ddf",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "[\"aliases\"]",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "c9100c4c8e638a1d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 308.5
+  },
+  "right": {
+    "id": "bb40d965a28fb74d",
+    "type": "split",
+    "children": [
+      {
+        "id": "0fb74699295f6152",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5b0f7f1a9131f5d8",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "content/docs/Cryptography_Classic/1.Affine.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "1.Affine 的大纲"
+            }
+          },
+          {
+            "id": "4d5d828e1e733d3a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "安卓底层改机分析蓝队 · 半年系统学习路线.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "安卓底层改机分析蓝队 · 半年系统学习路线 的反向链接列表"
+            }
+          },
+          {
+            "id": "8ff32d898b0b4a48",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "安卓底层改机分析蓝队 · 半年系统学习路线.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "安卓底层改机分析蓝队 · 半年系统学习路线 的出链列表"
+            }
+          },
+          {
+            "id": "3927bc1d429a054e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "23745e778515242a",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "bases:新建数据库": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "excalidraw-cn:Create New Excalidraw File": false,
+      "formatto-format:Format Document": false
+    }
+  },
+  "active": "1f660d8e5c82e9c1",
+  "lastOpenFiles": [
+    "public/docs/cryptography_classic/1.affine/index.html",
+    "public/docs/cryptography_classic/1.affine",
+    "content/docs/Cryptography_Classic/_index.md",
+    "content/docs/Cryptography_Classic/1.Affine.md",
+    "public/docs/cryptography_classic/index.xml",
+    "public/docs/cryptography_classic/index.html",
+    "public/docs/cryptography_classic/未命名/index.html",
+    "public/docs/cryptography_classic/未命名",
+    "public/docs/cryptography_classic",
+    "content/docs/first-page.md",
+    "content/docs/Cryptography_Classic",
+    "content/docs/_index.md",
+    "content/_index.md",
+    "README.md",
+    "6.指令集系列/Level 3：比较与条件跳转.md",
+    "6.指令集系列/0. 目标.md",
+    "6.指令集系列/Level 5：表写入 + GC 写屏障.md",
+    "6.指令集系列/Level 4：表读取（快慢路径）.md",
+    "6.指令集系列/Level 2：简单算术.md",
+    "6.指令集系列/Level 0：纯寄存器搬运（零抽象）.md",
+    "6.指令集系列/Level 1：立即数_常量加载.md",
+    "未命名.md",
+    "5.lua字节码解析.md",
+    "ReleasePDF/PDF/6.指令集系列/1. 虚拟机入口和MOVE指令.pdf",
+    "ReleasePDF/PDF/6.指令集系列/0. 目标.pdf",
+    "ReleasePDF/PDF/6.指令集系列",
+    "4.Lua数据结构分析.md",
+    "3.浅尝辄止Lua虚拟机.md",
+    "2.虚拟机类型.md",
+    "1.LuaVM.md",
+    "zhuanma/README.md",
+    "知识分支闭环.md",
+    "Phase_1/Day16-2：ClassLoader加载链.md",
+    "安卓底层改机分析蓝队 · 半年系统学习路线.md",
+    "Phase_1/20A09D48410C7896718A4F265E011860.jpg",
+    "Phase_1/Day16-1：dex文件解析.md",
+    "毕业检验项目：android_攻防蓝队系统化实战.md",
+    "未命名.canvas"
+  ]
+}

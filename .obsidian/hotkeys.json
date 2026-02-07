@@ -1,0 +1,35 @@
+{
+  "outline:open": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "O"
+    }
+  ],
+  "editor:insert-codeblock": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "L"
+    }
+  ],
+  "editor:toggle-code": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "L"
+    }
+  ],
+  "formatto-format:formatto-logo": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "S"
+    }
+  ]
+}
