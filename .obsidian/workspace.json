@@ -63,8 +63,7 @@
               "title": "Day13：进程模型总结"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -137,13 +136,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/docs/Notes/LuaVM分析/1.LuaVM.md",
+                "file": "README.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "1.LuaVM 的大纲"
+              "title": "README 的大纲"
             }
           },
           {
@@ -227,8 +226,9 @@
       "formatto-format:Format Document": false
     }
   },
-  "active": "4b5a59eef5ca5b9a",
+  "active": "6ae14c91da8e308d",
   "lastOpenFiles": [
+    "content/docs/Notes/LuaVM分析/1.LuaVM.md",
     "content/docs/Notes/AndroidSource/Phase_1/Day18：JNI 调用路径.md",
     "content/docs/Notes/AndroidSource/Phase_1/Day17：Dex 加载流程.md",
     "content/docs/Notes/AndroidSource/Phase_1/Day16-1：dex文件解析.md",
@@ -260,7 +260,6 @@
     "content/docs/Notes/奇妙想法/汇编还原C.md",
     "content/docs/Notes/设计模式/1. Singleton模式.md",
     "content/docs/Notes/_index.md",
-    "content/docs/Notes/奇妙想法/临时经验.md",
     "content/docs/Notes/设计模式",
     "public/docs/index.xml",
     "public/docs/notes/androidsource/phase_1/index.xml",
