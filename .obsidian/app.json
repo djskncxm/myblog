@@ -3,14 +3,15 @@
   "promptDelete": false,
   "readableLineLength": true,
   "pdfExportSettings": {
-    "pageSize": "A4",
+    "pageSize": "Tabloid",
     "landscape": false,
     "margin": "0",
     "downscalePercent": 100
   },
   "trashOption": "local",
   "spellcheck": false,
-  "showIndentGuide": false,
+  "showIndentGuide": true,
   "tabSize": 4,
-  "showLineNumber": false
+  "showLineNumber": false,
+  "focusNewTab": false
 }

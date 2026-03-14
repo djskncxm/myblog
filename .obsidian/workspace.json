@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "6ae14c91da8e308d",
+            "id": "b0c8fea51ee514fc",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -22,7 +22,7 @@
             }
           },
           {
-            "id": "6afd0a20d1149e2a",
+            "id": "7cde456630c21680",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -36,21 +36,48 @@
             }
           },
           {
-            "id": "f46a7f280757e089",
+            "id": "ce97056b4b6d4655",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "content/docs/Notes/AndroidSource/Phase_2/Day 32：so 加载流程（linker）.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "Day 32：so 加载流程（linker）"
+            }
+          },
+          {
+            "id": "c81691bf47510ba9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "content/docs/Notes/AndroidSource/Phase_2/Day 29：ELF 文件概述.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Day 29：ELF 文件概述"
+            }
+          },
+          {
+            "id": "e7c817aa6d950c72",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "content/docs/Notes/AndroidSource/Phase_1/Week 4：整合 & 输出.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Week 4：整合 & 输出"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -118,27 +145,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "5b0f7f1a9131f5d8",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "README.md",
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "README 的大纲"
-            }
-          },
-          {
             "id": "4d5d828e1e733d3a",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "安卓底层改机分析蓝队 · 半年系统学习路线.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -148,7 +160,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "安卓底层改机分析蓝队 · 半年系统学习路线 的反向链接列表"
+              "title": "README 的反向链接列表"
             }
           },
           {
@@ -193,8 +205,24 @@
               "icon": "lucide-archive",
               "title": "添加笔记属性"
             }
+          },
+          {
+            "id": "d02c62c5115b3c30",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "README.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "README 的大纲"
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -213,48 +241,48 @@
       "formatto-format:Format Document": false
     }
   },
-  "active": "f46a7f280757e089",
+  "active": "b0c8fea51ee514fc",
   "lastOpenFiles": [
-    "我的三年.md",
+    "content/docs/Notes/AndroidSource/_index.md",
+    "content/docs/Notes/AndroidSource/Phase_2/Day 32：so 加载流程（linker）.md",
+    "content/docs/Notes/AndroidSource/Phase_2/Day 29：ELF 文件概述.md",
+    "content/docs/Notes/AndroidSource/Phase_1/Week 4：整合 & 输出.md",
+    "content/docs/Notes/AndroidSource/Phase_1/Day15：ART 总览.md",
+    "content/docs/Notes/AndroidSource/Phase_1/Day 21：Week 3 总结.md",
+    "content/docs/Notes/AndroidSource/Phase_1/Day16-1：dex文件解析.md",
+    "content/docs/Notes/AndroidSource/Phase_1/Day17：Dex 加载流程.md",
+    "content/docs/Notes/AndroidSource/Phase_1/Day18：JNI 调用路径.md",
+    "content/docs/Notes/AndroidSource/Phase_1/Day19：解释器 、 JIT 、 AOT.md",
+    "content/docs/Notes/AndroidSource/Phase_1/Day20：工具实验.md",
+    "content/docs/Notes/AndroidSource/Phase_1/20A09D48410C7896718A4F265E011860.jpg",
     "README.md",
+    "content/docs/Notes/设计模式/6. Prototype 原型.md",
+    "content/docs/Notes/Android12 Security Lab/2. CVE-2021-39632.md",
+    "content/docs/Notes/Android12 Security Lab/1. CVE-2021-39630.md",
+    "content/_index.md",
+    "content/docs/Notes/Android12 Security Lab/_index.md",
+    "我的三年.md",
+    "content/docs/Notes/设计模式/_index.md",
+    "content/docs/Notes/Android12 Security Lab/template.md",
+    "content/docs/Notes/Android12 Security Lab/未命名.md",
+    "content/docs/Notes/LuaVM分析/1.LuaVM.md",
+    "content/docs/Notes/LuaVM分析/_index.md",
+    "content/docs/Notes/AndroidSource/Phase_1/Day5：启动参数.md",
+    "content/docs/Notes/设计模式/5. Builder 建造者.md",
+    "content/docs/Notes/Android12 Security Lab",
+    "content/docs/Notes/AndroidSource/未命名",
     "Pasted image 20260312143712.png",
     "Pasted image 20260312143706.png",
     "Pasted image 20260312143708.png",
-    "content/docs/Notes/LuaVM分析/1.LuaVM.md",
-    "content/docs/Notes/AndroidSource/_index.md",
-    "content/docs/Notes/AndroidSource/Phase_1/Day18：JNI 调用路径.md",
-    "content/docs/Notes/AndroidSource/Phase_1/Day17：Dex 加载流程.md",
-    "content/docs/Notes/AndroidSource/Phase_1/Day16-1：dex文件解析.md",
-    "content/docs/Notes/AndroidSource/Phase_1/Day15：ART 总览.md",
     "content/docs/Notes/AndroidSource/Phase_1/Day13：进程模型总结.md",
     "content/docs/Notes/AndroidSource/Phase_1/Day6：安卓启动图.ex",
-    "content/docs/Notes/AndroidSource/Phase_1/Day8：Zygote fork 机制.md",
-    "content/docs/Notes/AndroidSource/Phase_1/Day9：UID、GID.md",
-    "content/docs/Notes/AndroidSource/Phase_1/Day7：周总结.md",
-    "content/docs/Notes/AndroidSource/Phase_1/_index.md",
-    "content/docs/Notes/设计模式/_index.md",
-    "content/docs/Notes/AndroidSource/Phase_1/Day4：AVB、dm-verity.md",
-    "content/docs/Notes/AndroidSource/Phase_1/Day2：init 进程.md",
-    "content/docs/Notes/AndroidSource/Phase_1/20A09D48410C7896718A4F265E011860.jpg",
-    "content/docs/Notes/LuaVM分析/6.指令集系列/Level 1：立即数_常量加载.md",
-    "content/docs/Notes/LuaVM分析/6.指令集系列/Level 0：纯寄存器搬运（零抽象）.md",
-    "content/docs/Notes/分布式系统/_index.md",
-    "content/docs/Notes/分布式系统/6. 容错 raft.md",
-    "content/docs/Notes/设计模式/3. Simple Factory.md",
-    "content/docs/Notes/设计模式/4. Abstract Factory 抽象工厂.md",
     "content/docs/Notes/分布式系统",
-    "content/docs/Notes/分布式系统.md",
-    "content/docs/Notes/设计模式/2. Factory Method 工厂方法.md",
-    "content/docs/Notes/奇妙想法/汇编还原C.md",
-    "content/docs/Notes/设计模式/1. Singleton模式.md",
     "content/docs/Notes/设计模式",
     "public/docs/index.xml",
     "public/docs/notes/androidsource/phase_1/index.xml",
     "public/docs/notes/luavm分析/index.xml",
     "public/docs/notes/index.xml",
     "public/docs/docs/cryptography/modern/index.xml",
-    "public/docs/projects/androidrom/index.xml",
-    "public/docs/notes/androidsource/index.xml",
     "public/docs/projects/dashdoard.png",
     "public/docs/notes/androidsource/phase_1/20A09D48410C7896718A4F265E011860.jpg",
     "public/docs/docs/cryptography/modern/panelbg.png",
